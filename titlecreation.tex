@@ -1,0 +1,93 @@
+%\documentclass[11pt,a4paper]{article}
+%\usepackage[pdftex]{graphicx}
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+
+\section{Title Creation}
+\subsection{Standard title pages}
+
+\paragraph{}
+The commands are placed in the top matter:
+\begin{description}
+	\item[\texttt{$\backslash$title}:] set document title \hfill \\
+		\verb|\title{|Beginning with \verb|\LaTeX{}}|
+	\item[\texttt{$\backslash$author}:] list of document's author
+	\item[\texttt{$\backslash$and}:] multiple author \hfill \\
+		\verb|\author{|Linus \verb|\and| Stallman\verb|}|
+	\item[\texttt{$\backslash$date}:] set the date, default is \verb|\today| \hfill \\
+		\verb|\date{|Nov 28, 2011\verb|}|
+	\item[\texttt{$\backslash$thank}:] can be used in the \verb|\title| \hfill \\
+		\verb|\author{|xuansamdinh \verb|\thank{|vnluser sns!\verb|}}|
+\end{description}
+
+\paragraph{}
+The command to generate the title for document:
+\begin{description}
+	\item[\texttt{$\backslash$maketitle}:] using to make title
+		\begin{verbatim}
+		\begin{document}
+		\maketitle
+		. . .
+		\end{document}
+		\end{verbatim}
+\end{description}
+These commands are depended on what document class which is used.
+
+\subsection{Custom title pages}
+\subsubsection{Create the title}
+
+\paragraph{Preamble}
+\begin{verbatim}
+\documentclass[pdf,12pt,a4paper]{article}
+\usepackage[pdftex]{graphicx}
+\newcommand{\Hrule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+\input{title.tex}
+
+
+\end{document}
+\end{verbatim}
+
+\paragraph{}
+Create new file named \emph{title.tex} in the same directory which is contained:
+\begin{verbatim}
+\begin{titlepage}
+<anything else is here>
+\end{titlepage}
+\end{verbatim}
+
+\paragraph{}
+Here is what you need to know to write your title:
+\begin{description}
+	\item[Alignment:] using \texttt{center}, \texttt{flushleft}, or \texttt{flushright} enviroment.
+	\item[Images:] include images. Remember to \emph{graphicx} package. \hfill \\
+		\verb|\includegraphics[width=0.15\textwidth]{./logo}|
+	\item[Text size:] Following commands: 
+		\begin{itemize}
+			\item[-] \verb|\Huge|
+			\item[-] \verb|\huge|
+			\item[-] \verb|\LARGE|
+			\item[-] \verb|\Large|
+			\item[-] \verb|\large|
+			\item[-] \verb|\small|
+			\item[-] \verb|\footnotesize|
+			\item[-] \verb|\tiny|
+			\item[-] \verb|\normalsize|
+		\end{itemize}
+	\item[New line:] \verb|\\|. Addition space: \verb|\\ [1cm]|
+	\item[Date - Time:] \verb|\date{Nov 30, 2011}| \verb|\today|
+	\item[Filling the page:] \verb|\vfill| (like \verb|\hfill|)
+\end{description}
+
+\paragraph{Example:}
+\input{title.tex}
+
+\subsubsection{Intergrating the title page}
+\begin{verbatim}
+\input{title.tex}
+\end{verbatim}
+\subsubsection{Addition documentation and packages}
+
+\paragraph{}
+The \emph{titlepages} packages.

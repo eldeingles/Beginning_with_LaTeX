@@ -1,0 +1,159 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{booktabs}
+
+\begin{document}
+\tableofcontents
+\newpage
+\section{Text formatting}
+\subsection{Hyphenation}
+\begin{verbatim}
+\hyphenation{word list}
+\end{verbatim}
+
+\paragraph{Example:}
+\begin{verbatim}
+\hyphenation{FORTRAN Hy-phen-a-tion}
+\end{verbatim}
+\subsubsection{Keep words on one line}
+
+\paragraph{}
+\verb|\mbox{text}| command keeps several words on one line together, like this:
+My phone number is \mbox{0988 249 750}.
+\paragraph{}
+\verb|\mbox{text}| is similar to \verb|\mbox|, but in addition there will be a visible
+draw around the content, like this: My phone number is \fbox{0988 249 759}.
+
+
+\subsection{Quote-marks}
+
+\paragraph{}
+This section will be covered later.
+
+\subsection{Diacritics and accents}
+\paragraph{}
+Diacritics may be added to letters by placing special escaped metacharacters before the letter
+that requires the diacritic. For a list of diacritic metacharacters, see \LaTeX{}\slash Accents.
+
+\subsection{Space between Words and Sentences}
+
+\paragraph{}
+Disable the addtional space after periods can be disbled with:
+\begin{verbatim}
+\frenchspacing
+\end{verbatim}
+If you wanna turn \emph{frenchspacing} off, using:
+\begin{verbatim}
+\nonfrenchspacing
+\end{verbatim}
+command.
+
+\paragraph{}
+Make \LaTeX{} doesn't treat that \emph{periods} (.) as \emph{the end} of sentences, using:
+\begin{verbatim}
+\@.
+\end{verbatim}
+etc., using \verb|\@| in front of a period.
+\paragraph{}
+A tilde `$\sim$' character generates a space that cannot be enlarged and addtionally
+prohibits a line break.
+
+\subsubsection{Margin misalignment and interword spacing}
+\paragraph{\emph{sloppypar} environment:} tells \LaTeX{} to adjust word spacing less trictly.
+\paragraph{Example:}
+\begin{sloppypar}
+This is a paragraph with a very long word ABCDEFGHIJKLMNOPQRSTVWXYZ; then we have another bad thing
+--- a long number 1234567890123456789.
+\end{sloppypar}
+
+\subsection{Ligatures}
+\paragraph{}
+Using:
+\begin{itemize}
+	\item[-] \verb|{}|
+	\item[-] \verb|{kern0pt}|
+\end{itemize}
+between two letters of a \underline{combination} words.
+\begin{verbatim}
+\Large Not ``ff'', but ``f{}f''.
+\end{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{@{} c @{}}
+		\hline\noalign{\smallskip}
+		\Large Not ``ff'', but ``f{}f''. \\
+		\hline\noalign{\smallskip}
+	\end{tabular}
+	\caption{Example of using ``Ligatures''}
+	\label{ligature}
+\end{table}
+
+\subsection{Slash marks}
+\begin{description}
+	\item[/:] not allow following characters to be ``broken'' over multple lines.
+	\item[\texttt{$\backslash$slash}:] allow following characters to be ``broken'' over multple lines.
+\end{description}
+
+\subsection{Emphasizing text}
+
+\paragraph{}
+Using \verb|\emph{|\emph{text}\verb|}| to output text like this \emph{text emphasized}.
+
+\subsection{Fonts}
+
+\paragraph{See also:} \emph{\LaTeX{}/Fonts}
+
+\subsubsection{Font styles}
+\paragraph{}
+The are three main font families:
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item[-] \textrm{roman}
+	\item[-] \textsf{sans serif}
+	\item[-] \texttt{monospace}
+\end{itemize}
+List of all commands:
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ p{3.5cm}  | p{3.5cm} | p{4cm} }
+		\toprule
+		\textbf{\LaTeX{} command} & \textbf{Equivalen to} & \textbf{Output style} \\
+		\midrule \\
+		\verb|\textnormal{|\ldots\verb|}| & \verb|{\normalfont| \ldots\verb|}| & document font family \\ \hline \noalign{\smallskip}
+		\verb|\emph{|\ldots\verb|}| & \verb|{\em| \ldots\verb|}| & \emph{emphasis} \\ \hline \noalign{\smallskip}
+		\verb|\textrm{|\ldots\verb|}| & \verb|{\rmfamily| \ldots\verb|}| & \textrm{roman font family} \\ \hline \noalign{\smallskip}
+		\verb|\sffamily{|\ldots\verb|}| & \verb|{\sffamily| \ldots\verb|}| & \textsf{sans serif ff} \\ \hline \noalign{\smallskip}
+		\verb|\texttt{|\ldots\verb|}| & \verb|{\texttt| \ldots\verb|}| & \texttt{teletypefont family} \\ \hline \noalign{\smallskip}
+		\verb|\textup{|\ldots\verb|}| & \verb|{\textup| \ldots\verb|}| & \textup{upright shape} \\ \hline \noalign{\smallskip}
+		\verb|\textit{|\ldots\verb|}| & \verb|{\textit| \ldots\verb|}| & \textit{italic shape} \\ \hline \noalign{\smallskip}
+		\verb|\textsl{|\ldots\verb|}| & \verb|{\textsl| \ldots\verb|}| & \textsl{slanted shape} \\ \hline \noalign{\smallskip}
+		\verb|\textsc{|\ldots\verb|}| & \verb|{\textsc| \ldots\verb|}| & \textsc{Small Capitals} \\ \hline \noalign{\smallskip}
+		\verb|\uppercase{|\ldots\verb|}| & \verb|{\uppercase| \ldots\verb|}| & \uppercase{all caps} \\ \hline \noalign{\smallskip}
+		\verb|\textbf{|\ldots\verb|}| & \verb|{\textbf| \ldots\verb|}| & \textbf{bold} \\ \hline \noalign{\smallskip}
+		\verb|\textmd{|\ldots\verb|}| & \verb|{\textmd| \ldots\verb|}| & \textmd{medium weight} \\
+		\bottomrule
+	\end{tabular}
+	\caption{List of all \LaTeX{} command to specify font styles}
+	\label{fontstyle}
+\end{table}
+\paragraph{\underline{Underline} text}
+\subparagraph{\texttt{$\backslash$underline}:} make words will not be break properly.
+\subparagraph{\emph{ulem} package:} provides these commands:
+\begin{itemize}
+	\item[-] \verb|\normalem|, anternatively, use \emph{ulem}'s \texttt{normalem} option
+	\item[-] \verb|\uline{|\ldots\verb|}|
+	\item[-] \verb|\uwave{|\ldots\verb|}|
+	\item[-] \verb|\sout{|\ldots\verb|}|: stricke-out
+\end{itemize}
+
+
+\subsubsection{Sizing text}
+
+\paragraph{Commands:} This table is not available right now.
+
+
+
+
+
+
+
+\end{document}

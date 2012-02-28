@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[pdftex]{graphicx}
+%\usepackage[fixlanguage]{babelbib}
+\usepackage{eqparbox}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+%\usepackage[table]{xcolor}
+\usepackage{paralist}
+\usepackage[utf8]{vntex}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\title{\textbf{\huge{Bắt đầu với \LaTeX}}}
+\author{\textbf{xuansamdinh}\\
+\texttt{\underline{xuansamdinh.n2i@gmail.com}}}
+\date{Nov 26, 2011}
+\begin{document}
+\maketitle
+\begin{flushleft}
+	\textbf{Họ và tên: Đinh Xuân Sâm}\\
+	\textbf{Lớp:} 08I2\\
+	\textbf{Mã SV:} 081C900130
+\end{flushleft}
+\pagebreak
+\renewcommand{\abstractname}{--- Philosophy ---}
+\begin{abstract}
+\begin{center}
+\textbf{\emph{``Nothing is impossible!''}} --- Anonymous
+\end{center}
+\end{abstract}
+\pagebreak
+\renewcommand{\contentsname}{\underline{NỘI DUNG}}
+\tableofcontents
+\listoftables
+\pagebreak
+
+
+\newpage
+\part{Cấu trúc tài liệu \LaTeX{}}
+\include{docstructure}
+
+
+\newpage
+
+
+\part{Lists Structures}
+%\include{liststructure}
+
+\newpage
+
+\part{Tables}
+\include{tables}
+
+\newpage
+
+\part{Title Creation}
+\include{titlecreation}
+
+\newpage
+
+\part{Pages Layout}
+\include{pageslayout}
+
+\newpage
+
+\part{Formatting}
+%\include{formatting}
+
+%\begin{thebibliography}{9}
+%\bibitem{wrox_linuxpro}
+%Wrox, \emph{Beginning Linux Programming}, 4th Edition.
+%\bibitem{wrox_bashpro}
+%Wrox, \emph{Bash Programming}, 2011.
+%\end{thebibliography}
+\newpage
+\addcontentsline{toc}{section}{Tài liệu tham khảo}
+%\selectbiblanguage{vietnam}
+\bibliographystyle{plain}
+\nocite{*}
+%\bibliographystyle{ieeetr}
+\bibliography{learnlatex}
+
+\end{document}

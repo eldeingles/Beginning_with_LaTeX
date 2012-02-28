@@ -1,0 +1,434 @@
+\section{List Structure}
+\subsection{List structures}
+\paragraph{Three enviroment:}
+\begin{itemize}
+	\item[-] itemize.
+	\item[-] enumerate.
+	\item[-] description.
+\end{itemize}
+\paragraph{Lists format:}
+All lists follow the basic format:
+\begin{verbatim}
+	\begin{list_type}
+	\item	The first item.
+	\item	The second item.
+	\item	The third.
+	\item	etc \ldots
+	\end{list_type}
+\end{verbatim}
+
+\subsubsection{Itemize}
+\paragraph{}
+This enviroment is for your standard bulleted list of items.
+The results is looks like this:
+\begin{itemize}
+	\item 1st item.
+	\item 2nd item.
+	\item 3rd item.
+\end{itemize}
+Or you can modify a bit, as below:
+\begin{verbatim}
+\begin{itemize}
+	\item[+] 1st item.
+	\item[+] 2nd item.
+	\item[+] 3rd item.
+\end{itemize}
+\end{verbatim}
+And the result would looks like this:
+\begin{itemize}
+	\item[+] 1st item.
+	\item[+] 2nd item.
+	\item[+] 3rd item.
+\end{itemize}
+or:
+\begin{itemize}
+	\item[$\rightarrow$] 1st item.
+	\item[$\rightarrow$] 2nd item.
+	\item[$\rightarrow$] 3rd item.
+\end{itemize}
+Can you guess how to make a result as right above?
+
+\subsubsection{Enumerate}
+\paragraph{}
+The enumerate enviroment is for ordered lists, where by defult,
+each item is numbered sequentially.\\
+The result:
+\begin{enumerate}
+	\item 1st item.
+	\item 2nd item.
+	\item 3rd item.
+\end{enumerate}
+
+\subsubsection{Description}
+\paragraph{}
+The description enviroment is slightly different.
+You can specify the item label by passing it as optional argument
+(although optional, it would look odd if you didn't include it!). Ideal for
+a series of definitions, such as a glossary.
+\paragraph{}
+Example:
+\begin{verbatim}
+\begin{description}
+	\item[First:] 1st item.
+	\item[Second:] 2nd item.
+	\item[Third:] 3rd item.
+\end{description}
+\end{verbatim}
+and the result:
+\begin{description}
+	\item[First:] 1st item.
+	\item[Second:] 2nd item.
+	\item[Third:] 3rd item.
+\end{description}
+
+\paragraph{}
+Sometimes you want a description where the text begins on a new line.
+This cannot easily be done with \verb|\\|. The trick is to use
+\verb|\hfill|.
+\begin{verbatim}
+\begin{description}
+	\item[First:] \hfill \\ 1st item.
+	\item[Second:] \hfill \\ 2nd item.
+	\item[Third:] \hfill \\ 3rd item.
+\end{description}
+\end{verbatim}
+and the result:
+\begin{description}
+	\item[First:] \hfill \\ 1st item.
+	\item[Second:] \hfill \\ 2nd item.
+	\item[Third:] \hfill \\ 3rd item.
+\end{description}
+
+\subsection{Compacted lists}
+\paragraph{}
+In standard \LaTeX{} document classes, the vertical spacing between items,
+and above and below the list as a whole, is more than between paragraphs:
+it may look odd if the descriptions are too short. If you want tightly-packed
+lists, use the \verb|mdwlist| (\verb|mdwtools| bundle), which provides
+compact, ``starred'' versions of ther previous enviroments, i.e.
+\verb|itemize*|, \verb|enumerate*|, \verb|description*|. They work exactly
+in the same way, but the output is more compact.\\
+Other packages: \verb|paralist|, \verb|enumitem|.
+
+\subsection{Nested lists}
+\paragraph{}
+\LaTeX{} will happily allow you to insert a list enviroment in to an existing
+one (up to a depth of 4 -- if you need more than four, use the
+\verb|easylist| package).
+\paragraph{}
+Simply begin the appropriate enviroment at the desired point within the
+current list. \LaTeX{} will sort out the layout and any numbering for you.
+\begin{verbatim}
+\begin{enumerate}
+	\item 1st item.
+		\begin{enumerate}
+			\item 1st nested item.
+			\item 2nd nested item.
+			\item 3rd nested item.
+		\end{enumerate}
+	\item 2nd item.
+	\item 3rd item.
+\end{enumerate}
+\end{verbatim}
+%----
+\begin{enumerate}
+	\item 1st item.
+\begin{enumerate}
+	\item 1st nested item.
+	\item 2nd nested item.
+	\item 3rd nested item.
+\end{enumerate}
+	\item 2nd item.
+	\item 3rd item.
+\end{enumerate}
+
+\subsection{Customizing lists}
+\paragraph{}
+Customizing \LaTeX ~is outside the beginners' domain. While not necessarily
+difficult in itseld, because beginners are already overwhelmed with the array
+of commands and enviroments, moving on to more advanced topics runs the risk
+of confusion.
+\paragraph{}
+However, since the tutorial is on formatting, I shall still include a brief
+guide on customizing lists. Feel free to skip!
+
+\subsubsection[Line spaces]{Customizing line spacing in lists}
+\paragraph{}
+Inside lists you can redefine some leghth/dimension varibles of \LaTeX~, for
+example using:
+\begin{verbatim}
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item The first item.
+	\item The second item.
+\end{itemize}
+\end{verbatim}
+the result: more nicely!
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item The first item.
+	\item The second item.
+\end{itemize}
+\paragraph{}
+Alternatively, to create a unified look in your document you can define your
+own enumerate enviroment:
+\begin{verbatim}
+	\newenvironment{my_enumerate}
+		{\begin{enumerate}
+			\setlength{\itemsep}{1pt}
+			\setlength{\parskip}{0pt}
+			\setlength{\parsep}{0pt}}
+		{\end{enumerate}}
+\end{verbatim}
+And let try it: more nicely too!
+\newenvironment{my_enumerate}
+	{\begin{enumerate}
+		\setlength{\itemsep}{1pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\parsep}{0pt}
+	\end{enumerate
+}
+\begin{my_enumerate}
+	\item First item.
+	\item Second item.
+\end{my_enumerate}
+
+\subsubsection[Enumerated lists]{Customizing enumerated lists}
+\paragraph{}
+The thing people want to change most often with Enumerated lists are the
+counters. A quick solution to this problem is provided by the \verb|enumerate|
+package of David Carlisle, or the more sophisticated package \verb|enumitem|
+by Javier Bezos.
+\paragraph{}
+To go any further and do it yourseld instead, a brief instroduction to \LaTeX{} \emph{couters} is required. For anything that \LaTeX ~automatically numbers,
+such as section headers, figures, and itemized lists, there is a counter
+associated with it that controls the numbering.
+\paragraph{}
+There a four individual counters that are associated with itemized lists,
+each one represents the four possible levels of nesting, which are called:
+\begin{my_enumerate}
+	\item \verb|enumi|.
+	\item \verb|enumii|.
+	\item \verb|enumiii|.
+	\item \verb|enumiv|.
+\end{my_enumerate}
+In order to reset any of these counters in the middle of an enumeration
+simply use \verb|\setcounter|. The counter is incremented by \verb|\item|
+before it is printed.
+\subparagraph{}
+For example to reset \verb|enumi| use:
+\begin{verbatim}
+\begin{enumerate}
+	\setcounter{enumi}{4}
+	\item Fifth element.
+\end{enumerate}
+\end{verbatim}
+and will get the result:
+\begin{enumerate}
+	\setcounter{enumi}{4}
+	\item Fifth element.
+\end{enumerate}
+
+\paragraph{}
+Each counter also has a default format that dictates how it is displayed
+whenever \LaTeX{} needs to print it. Such formats are specified using internal
+\LaTeX{} commands:
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item \verb|\arabic| $\rightarrow$ 1, 2, 3 \ldots
+	\item \verb|\alph| $\rightarrow$ a, b, c \ldots
+	\item \verb|\Alph| $\rightarrow$ A, B, C \ldots
+	\item \verb|\roman| $\rightarrow$ i, ii, iii, ldots
+	\item \verb|\Roman| $\rightarrow$ I, II, III, ldots
+	\item \verb|\fsymbol| $\rightarrow$ Aimed at footnotes (see blow), but
+		prints a sequence of symbols.
+\end{itemize}
+
+\paragraph{}
+Each counter entity holds various bits of information about itself. To get
+to the numbered element, simply use \verb|the| flollowed immediately
+(i.e., no space) by the name of the counter, e.g., \verb|\theenumi|.
+This often referred to as the \emph{representation} of a counter.
+\paragraph{}
+Now, that's most of the techicalities out of the way. To make changes to
+the formatting of a given level:\newline
+\verb|\renewcommand{\representation}{\format_command{counter}}|\newline
+Examples:
+\begin{verbatim}
+%Redefine the first level:
+\renewcommand{\theenumi}{\Roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi}
+
+%Redefine the second level:
+\renewcommand{\theenumii}{\Alpha{enumii}}
+\renewcommand{\labelenumii}{\theenumii}
+\end{verbatim}
+
+%Redefine the first level:
+\renewcommand{\theenumi}{\roman{enumi}}
+\renewcommand{\labelenumi}{\theenumi}
+
+%Redefine the second level:
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\labelenumii}{\theenumii}
+the result:
+\begin{enumerate}
+	\item Level 1: 1st item.
+\begin{enumerate}
+	\item Level 2: 1st nested item.
+	\item Level 2: 2nd nested item.
+	\item Level 2: 3rd nested item.
+\end{enumerate}
+	\item Level 1: 2nd item.
+	\item Level 1: 3rd item.
+\end{enumerate}
+
+\paragraph{}
+The method used above first explicitly changes the format used by counter.
+However, ther element that controls the label needs to be updated to reflect
+the change, which is what the second line does. Another way to achieve this
+result is this:
+\begin{verbatim}
+\renewcommand{\labelenumi}{\roman{enumi}}
+\end{verbatim}
+This simply redefine the appearance of the label, which is fine, providing
+that you do not intend to cross-reference to a specific item within the list,
+in which case the reference will be printed in the previous format. This
+issue does not arise in the first example.
+Example:
+\begin{verbatim}
+\renewcommand{\labelenumi}{\roman{enumi}}
+\renewcommand{\labelenumii}{\alph{enumii}}
+\begin{enumerate}
+	\item Level 1: 1st item.
+\begin{enumerate}
+	\item Level 2: 1st nested item.
+	\item Level 2: 2nd nested item.
+	\item Level 2: 3rd nested item.
+\end{enumerate}
+	\item Level 1: 2nd item.
+	\item Level 1: 3rd item.
+\end{enumerate}
+\end{verbatim}
+the result:
+\renewcommand{\labelenumi}{\roman{enumi}}
+\renewcommand{\labelenumii}{\alph{enumii}}
+\begin{enumerate}
+	\item Level 1: 1st item.
+\begin{enumerate}
+	\item Level 2: 1st nested item.
+	\item Level 2: 2nd nested item.
+	\item Level 2: 3rd nested item.
+\end{enumerate}
+	\item Level 1: 2nd item.
+	\item Level 1: 3rd item.
+\end{enumerate}
+
+\paragraph{}
+Note that you can also ad other symbols, such as parentheses and periods,
+before and affter the counter. For instance, to create a list indexed by
+a lower case letters with parentheses before and after the letter, you
+might enter the following:
+\begin{verbatim}
+\renewcommand{\labelenumi}{\roman{enumi}.}
+\renewcommand{\labelenumii}{-\alph{enumii}-}
+\end{verbatim}
+the result:
+\renewcommand{\labelenumi}{\roman{enumi}.}
+\renewcommand{\labelenumii}{-\alph{enumii}-}
+\begin{enumerate}
+	\item Level 1: 1st item.
+\begin{enumerate}
+	\item Level 2: 1st nested item.
+	\item Level 2: 2nd nested item.
+	\item Level 2: 3rd nested item.
+\end{enumerate}
+	\item Level 1: 2nd item.
+	\item Level 1: 3rd item.
+\end{enumerate}
+
+\subsubsection[Itemised lists]{Customizing itemised list}
+\paragraph{}
+Itemised lists are not as complex as they do not need to count. Therefore,
+to customize, you simply change the labels. It can be done manully for each
+entry with \verb|\item[new symbol]|, eg \verb|\item[$star$]|.
+\paragraph{}
+The itemize labels are accessed via:
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item[---] \verb|\labelitemi|
+	\item[---] \verb|\labelitemii|
+	\item[---] \verb|\labelitemiii|
+	\item[---] \verb|\labelitemiv|
+\end{itemize}
+for the four respective levels.
+\begin{verbatim}
+\renewcommand{\labelitemi}{$\star$}
+\end{verbatim}
+the result:
+\renewcommand{\labelitemi}{$\star$}
+\begin{itemize}
+	\itemsep1pt \parskip0pt \parsep0pt
+	\item \verb|\labelitemi|
+	\item \verb|\labelitemii|
+	\item \verb|\labelitemiii|
+	\item \verb|\labelitemiv|
+\end{itemize}
+
+\paragraph{}
+Itemised list with tightly set items, that is no vertial space between two
+consecutive items, can be created as follows:
+\begin{verbatim}
+\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+	\item[-] \labelitemi
+	\item[-] \labelitemii
+	\item[-] \labelitemiii
+	\item[-] \labelitemiv
+\end{itemize}
+\end{verbatim}
+the result:
+\begin{itemize}
+	\setlength{\itemsep}{0cm}%
+	\setlength{\parskip}{0cm}%
+	\item[-] \verb|\labelitemi|
+	\item[-] \verb|\labelitemii|
+	\item[-] \verb|\labelitemiii|
+	\item[-] \verb|\labelitemiv|
+\end{itemize}
+\subsubsection[Details of customizing]{Details of customizing lists}
+\paragraph{}
+Note that is is necessary that the \verb|\renewcommand| appears after the\\
+\verb|\begin{document}| instruction so the changes made are taken into
+account. This is needed for both enumerate and itemized lists.
+
+\subsection{Inline lists}
+\paragraph{}
+Inline lists are a special case as they require the use of the
+\verb|paralist| package which provides the \verb|inparaenum| enviroment
+(with an optional formatting specification in square brackets, i.e: 
+\verb|\begin{inparaenum}[(\alph)]|):
+\subparagraph{Example:}
+\begin{verbatim}
+\textbf{\itshape Inline lists},
+which are sequential in nature, just like
+enumerated lists, but are
+\begin{inparaenum}[\itshape \alph\upshape)]
+\item formatted within their paragraph;
+\item usually labelled with letters; and
+\item usually have the final item prefixed with `and' or `or',
+\end{inparaenum}
+like this example\ldots
+\end{verbatim}
+
+\textbf{\itshape Inline lists}, which are sequential in nature, just like
+enumerated lists, but are
+\begin{inparaenum}[\itshape a\upshape)]
+\item formatted within their paragraph;
+\item usually labelled with letters; and
+\item usually have the final item prefixed with `and' or `or',
+\end{inparaenum}
+like this example\ldots
+\paragraph{}
+Other packages providing inline lists are \verb|shortlst| and \verb|enumitem|.

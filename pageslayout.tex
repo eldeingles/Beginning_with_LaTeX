@@ -1,0 +1,173 @@
+% \usepackage[a4paper]{geometry}
+\section{Pages Layout}
+\paragraph{}
+\LaTeX{} and the document calss will normally take care of page layout issues for you.
+For submission to an academic publication, this entire topic will be out of your hands,
+as the publishers want to control the presentation.
+\paragraph{}
+However, for your own documents, there are some obvious settings that you may wish to
+change: margins, page orientation and columns, to name but three.
+\paragraph{}
+The purpose of this tutorial is to show you how to configure
+your pages.
+
+\subsection{Page dimensions}
+\subsubsection{Top margin above Chapter}
+\subsubsection{Page size issues}
+
+
+
+\subsection{Page orientation}
+\subsection{Page styles}
+\subsubsection{Standard page styles}
+
+\paragraph{Commands:}
+\begin{description}
+	\item[\texttt{$\backslash$pagestyle\{}\emph{style}\texttt{\}}:] set globle pages style.
+	\item[\texttt{$\backslash$thispagestyle\{}\emph{style}\texttt{\}}:] set this page style.
+\end{description}
+
+\paragraph{Available \emph{style}s:}
+\begin{description}
+	\item[\emph{empty}:] Both header and footer are clear
+	\item[\emph{plain}:] Header is clear, but the footer contins the page number in the center
+	\item[\emph{headings}:] Footer is blank, header displays information according to documents class (e.g., section
+		name) and page number top right
+	\item[\emph{myheadings}:] Page number in top right, and it is possible to control the rest of the header. Available commands:
+		\begin{description}
+			\item[\texttt{$\backslash$markright}:] standard document class, book, report, and article
+			\item[\texttt{$\backslash$markboth}:] only in the book class
+		\end{description}
+\end{description}
+
+\paragraph{Example:} look at this page's top.
+\begin{verbatim}
+\thispagestyle{myheadings}
+\markright{xuansamdinh \hfill n2i \hfill}
+\end{verbatim}
+
+\thispagestyle{myheadings}
+\markright{xuansamdinh \hfill n2i \hfill}
+
+\paragraph{\emph{nopageno} package:} This package will make \verb|\pagestyle{plain}| have the same effect as
+\verb|\pagestyle{empty}|, effectively suppressing page numbering when it is used.
+
+\subsubsection{Customising with \texttt{fancyhdr} package}
+
+\paragraph{}Add following line to your preamble:
+\begin{verbatim}
+\usepackage{fancyhdr}
+\setlength{\headheihgt}{15.2pt}
+\pagestyle{fancy}
+\end{verbatim}
+
+\subsubsection{Another approach with \texttt{fancyhdr}}
+\subsubsection{Page \emph{n} of \emph{m}}
+\paragraph{}
+Some people like to pu the current page nummber in context with the whole document.
+\LaTeX{} only provides to current page number. However, you can use the \emph{lastpage}
+package to find the total number of pages, like this:
+\begin{verbatim}
+\usepackage{lastpage}
+. . .
+\cfoot{\thepage\ of \pageref{LastPage}}
+\end{verbatim}
+
+\paragraph{}
+\emph{Note the capital letters}. Also, add a backslash(\texttt{$\backslash$}) after
+\verb|\thepage| to ensure \underline{adequate} space between the page number and
+`of'. And recall, when using references, that you have to run \LaTeX{} an extra time
+to resolve the cross-references.
+
+\subsection{Multi-column pages}
+\paragraph{Simply ways}
+\begin{verbatim}
+\documentclass[twocolumn]{article}
+\end{verbatim} 
+\paragraph{\emph{multicol} package:}much more useful for handling multiple columns.
+It has several \underline{advantages}:
+\begin{itemize}
+	\item[-] Can support up to ten columns.
+	\item[-] Implements a \emph{mutilcols} environment, therefore, it is possible to
+		mix the number of columns with in a document.
+	\item[-] Additionally, the environment can be nested inside other environment, such as figure.
+	\item[-] \texttt{Multicol} outputs \emph{balanced} columns, whereby the columns on the
+		final page will be of roughly equal length.
+	\item[-] Vertical rules between columns can be customised.
+	\item[-] Column environment can be easily customised locally or globally.
+\end{itemize}
+Floats are not fully supported by this environment. It can only cope if you use the starred
+form of the float commands (e.g., \verb|\begin{figure*}|) which makes the float span all columns.
+This is not hugely problematic, since floats of the same width as a column may be too small, and
+you would probably want to span them anyway.
+\paragraph{}
+To create a typical two-column layout:
+\begin{verbatim}
+\begin{multicols}{2}
+	lots of text
+\end{multicols}
+\end{verbatim}
+
+\paragraph{}
+The parameter \verb|\columnseprule| holds the width of the vertical rules. By default, the lines
+are omitted as this parameter is set to a \underline{length} of 0pt. \\
+Change the horizontal space in betwen columns which \verb|\columnsep| parameter.
+\begin{description}
+	\item[\texttt{$\backslash$columnseprule}:] holds the width of the vertical rules, default is 0pt.
+		\begin{verbatim}
+		\setlength{\columnseprule}{1pt}
+		\end{verbatim}
+	\item[\texttt{$\backslash$columnsep}:] horizonal space between columns, default is 10pt.
+		\begin{verbatim}
+		\setlength{\columnsep}{20pt}
+		\end{verbatim}
+\end{description}
+
+\subsection{Manual page formatting}
+
+\paragraph{Commands:} List of all command are in the table [\ref{manuallyformat}]
+
+\paragraph{\texttt{number}} is the priority of the command in range from \emph{0} to \emph{4}.
+\begin{description}
+	\item[\emph{0}:] it will be easily ignored
+	\item[\emph{4}:] do it anyway
+\end{description}
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{ l @{ } p{7.5cm} }
+		\toprule
+		\textbf{Command} & \textbf{Description} \\ \midrule
+		\verb|\newline| & Breaks the line at the point of the command \\ \hline
+		\verb|\\| & Shorter version of the \verb|\newline| command \\ \hline
+		\verb|\\*| & Breaks the line at the point of the command and additionally
+		prohibits a page break after the forced line break \\ \hline
+		\verb|\linebreak[number]| & Breaks the line at the point of the command.
+		\texttt{number} is in range from \emph{0} $\rightarrow$ \emph{4} \\ \hline
+		\verb|\newpage| & Ends the current page and starts a new one \\ \hline
+		\verb|\pagebreak[number]| & Breaks the current page at the point of the command \\ \hline
+		\verb|\nopagebreak[number]| & Stop the page being broken at the point of the command \\ \hline
+		\verb|\clearpage| & Ends the current page and causes any floats encountered in the input, but
+		yet to appear, to be printed \\ \bottomrule
+	\end{tabular}
+	\caption{Manually page formatting}
+	\label{manuallyformat}
+\end{table}
+
+\subsection{Windows and orphans}
+
+\paragraph{}
+Put these commands in document preamble:
+\begin{verbatim}
+\windowpenalty=300
+\clubpenalty=300
+\end{verbatim}
+Try increasing these values if this does not help.
+
+\paragraph{}
+Have rubber band values for the space between paragraphs:
+\begin{verbatim}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
+\end{verbatim}
+
+\subsection{Summary}
+\subsection{References}

@@ -1,0 +1,91 @@
+\section{Các môi trường soạn thảo}
+\verb|\documentclass{article}|\\
+\verb|\begin{document}|
+\begin{center}
+Đây là nơi nội dung soạn thảo được xử lý và hiển thị\footnote{Một ví dụ về footnote}.\\
+\ldots
+\end{center}
+\verb|\end{document}|
+%{{{
+\section{Preamble}
+\subsection{Tiêu đề, tác giả, ngày tháng}
+\verb|\title{Beginning with \LaTeX}| --- Tiêu đề của tài liệu.\\
+\verb|\author{xuansamdinh}| --- Tác giả.\\
+\verb|\date{Nov 26, 2011}| --- Ngày tạo.
+
+\subsubsection{Lưu ý:}
+\begin{itemize}
+\item[-] \verb|\LaTeX| là cụm từ được định nghĩa trước, và sẽ in ra ``\LaTeX''.
+\item[-] Bạn có thể viết: \verb|\title{\textbf{Beginning with \LaTeX}}| để in ra
+tiêu đề có dạng: ``\textbf{Beginning with \LaTeX}''
+\end{itemize}
+
+%{{{
+
+\section{Bắt đầu tài liệu}
+\begin{verbatim}
+\begin{document} <-- Bắt đầu soạn thảo.
+\maketitle       <-- Tạo tiêu đề.
+\tableofcontents <-- Tảo bảng mục lục.
+\end{document}   <-- Kết thúc soạn thảo.
+\end{verbatim}
+\subsection{Tóm tắt nội dung:}
+\verb|\renewcommand{\abstractname}{--- Philosophy ---}|\\
+\verb|\begin{abstract}|\\
+... Đây là mục tóm tắt nội dung của tài liệu ...\\
+\verb|\end{abstract}|
+\paragraph{}
+Kết quả sẽ tương tự như sau:
+\begin{abstract}
+Một tài liệu ngắn về bước đầu tìm hiểu \LaTeX
+\end{abstract}
+\paragraph{}
+Sử dụng câu lệnh:\\
+\verb|\renewcommand{\abstractname}{Tên cần đổi thành}|\\
+để thay đổi dòng chữ mặc định là:\\
+\verb|Tóm tắt nội dung| $\rightarrow$ \verb|Tên cần đổi thành|
+\paragraph{}
+Ngoài ra còn có:\\*
+\verb|\renewcommand{\contentsname}{Nội dung}|\\
+\verb|\nenewcommand{\listtablename}{Danh sách các bảng biểu}|\\
+\verb|\renewcommand{\listfigurename}{Danh sách các hình}|
+%{{{
+\section{Phần, mục}
+\subsection{Levels}
+\paragraph{}
+\LaTeX có 7 cấp để chia phần, mục tài liệu, bao gồm:
+\\*
+\verb|\part{part}|\\
+\verb|\chapter{chapter}|\\
+\verb|\section{section}|\\
+\verb|\subsection{subsection}|\\
+\verb|\subsubsection{subsubsection}|\\
+\verb|\paragraph{paragraph}|\\
+\verb|\subparagraph{subparagraph}|
+%{{{
+\section{Ví dụ: Hello world!}
+\begin{itemize}
+	\item[-] \verb|Hello World!| trong C:
+%\newpage
+\begin{verbatim}
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main (int argc, char *argv[]) {
+    printf ("Hello world!\n");
+    exit(0);
+}
+\end{verbatim}
+\item[-] \verb|Hello world!| trong bash:
+\begin{verbatim}
+#!/usr/bin/env bash
+echo "Hello world!"
+\end{verbatim}
+
+\item[-] \verb|Hello world!| trong python:
+\begin{verbatim}
+>>> print "Hello world!"
+Hello world!
+\end{verbatim}
+\end{itemize}

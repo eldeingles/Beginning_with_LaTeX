@@ -1,0 +1,699 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{eqparbox}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+%\usepackage[table]{xcolor}
+%\usepackage[utf8]{vntex}
+\begin{document}
+\tableofcontents
+\listoftables
+\pagebreak
+
+
+\section{Tables}
+\subsection[\texttt{tabular}]{The \texttt{tabular} enviroment}
+\begin{verbatim}
+\begin{tabular}{pos}{table spec}
+\end{verbatim}
+
+\subsubsection{\emph{\{pos\}}}
+\begin{table}[htbp]
+	\centering
+\begin{center}
+	\begin{tabular}{| c | p{3cm} |}
+		\hline
+		\texttt{t} & top \\ \hline
+		\texttt{c} & center (default) \\ \hline
+		\texttt{b} & bottom \\ \hline
+	\end{tabular}
+\end{center}
+	\caption{\emph{\{pos\}} options}
+	\label{tabular_positions}
+\end{table}
+\subsubsection{\emph{\{table spec\}}}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | p{10cm} |}
+	\hline
+	\texttt{l} & left-justified column \\ \hline
+	\texttt{c} & center column \\ \hline
+	\texttt{r} & right-justified column \\ \hline
+	\verb|p{width}| & paragraph column with text vertically aligned at the top \\ \hline
+	\verb|m{width}| & paragraph column with text vertically aligned at the middle \\ \hline
+	\verb|b{width}| & paragraph column with text vertically aligned at the bottom \\ \hline
+	\texttt{|} & vertical line \\ \hline
+	\texttt{||} & double vertical line \\
+	\hline
+	\end{tabular}
+	\caption{\emph{\{table spec\}} options.}
+	\label{tabular_specs}
+\end{table}
+
+\subsubsection{Commands}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | p{10cm} |}
+	\hline
+	\verb|&| & column seperator \\ \hline
+	\verb|\\| & start new row. Additional space may be specified like this: \verb|\\[10pt]| \\ \hline
+	\verb|\hline| & horizontal line \\ \hline
+	\verb|\newline| & start a new line within a cell \\ \hline
+	\verb|\cline| & partial horizontal line beginning in column \emph{i} and ending in column \emph{j} \\ \hline
+	\end{tabular}
+\caption{List of \emph{command}s.}
+\label{tabular_commands}
+\end{table}
+
+\subsection{Column specification}
+Column specification using \verb|>{\cmd}| and \verb|<{\cmd}|.
+
+\subsection[Text wrapping]{Text wrapping in tables}
+\paragraph{}
+\textbf{\LaTeX{}}'s algorithms for formatting tables have a few shortcomings.
+One is that it will not automatically wrap text in cells, even if it overruns
+the width of the page.\\
+For columns that you know will contain a certain amount
+of text, then it is recommended that you use the \emph{p} attribute and specify
+the desired width of the column (although it may take some trial-and-error to
+get the result you want). Use the \emph{m} attribute to have the lines aligned
+toward middle of the box and the \emph{b} attribute to align along the bottom
+of the box.
+\subparagraph{Examples}
+\subsection[Text justfication]{Text justification in tables}
+\paragraph{}
+The \verb|tabular| enviroment helps control where lines should break, but
+cannot justify the text, which leads to ragged right edges.\\
+The \texttt{eqparbox} package provides the command \verb|\eqmakebox| which is
+like \verb|\makebox| but instead of a \texttt{width} argument, it takes a tag.
+
+\subsection{Other environments inside tables}
+\paragraph{}
+To resolve the problems which occurse when using other environments such as
+\texttt{verbatim} or \texttt{enumerate} inside table cells: change column specifier
+- \emph{\{table specs\}}, to ``\emph{paragraph}'' (\texttt{p}, \texttt{m} or \texttt{b}),
+i.e:
+\begin{verbatim}
+\begin{tabular}{| c | m{5cm}|}
+\end{verbatim}
+
+\subsection[Multiple columns]{Defining multiple columns}
+\paragraph{}
+It is possible to define many identical columns at once using the \\
+\verb|*{num}{ptr}|\\ syntax.\\
+I.e. A table contains 6 centered columns:
+\begin{verbatim}
+\begin{tabular}{| l | *{6}{c} | r |}
+\end{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | *{6}{c} | r |}
+	Team & P & W & D & L & F & A & Points \\ \hline
+	MU & 6 & 4 & 0 & 2 & 10 & 5 & 12 \\
+	\end{tabular}
+\caption{Multiple column}
+\label{multicols}
+\end{table}
+\subsection{\texttt{@}-expressions}
+\paragraph{}
+The column seperator can be specified with the \verb|@{..}| contruct.\\
+This command replaces the symbol ``\verb:|:'' by the \texttt{@}\{\emph{symbol}\} that was defined.
+
+\paragraph{}
+To add space, use \verb|@{\hspace{|\emph{width}\verb|}}|%\verb|@{\hspace{width}}|
+
+
+
+\subsection{Spanning}
+\subsubsection{Rows spanning multiple columns}
+\paragraph{}
+Command: \verb|\multicolumn{|\emph{num\_cols}\verb|}{|\emph{alignment}\verb|}{|\emph{contents}\verb|}|.
+\begin{description}
+	\item[\emph{num\_cols}:] number of subsequent columns to merge.
+	\item[\emph{alignment}:] \texttt{l}, \texttt{c}, \texttt{b} or \verb|p{|\emph{width}\verb|}| and so on.
+	\item[\emph{contents}:] actual data.
+\end{description}
+
+\begin{verbatim}
+	\begin{tabular}{| l | l |}
+		\hline
+		\multicolumn{2}{| c |}{List of Words}\\ \hline
+		n2i & nothing is impossible \\
+		xsd & xuansamdinh \\
+		vnluser & vietnam linux user \\ \hline
+	\end{tabular}
+\end{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | l |}
+		\hline
+		\multicolumn{2}{| c |}{List of Words} \\ \hline
+		n2i & nothing is impossible \\
+		xsd & xuansamdinh \\
+		vnluser & vietnam linux user \\ \hline
+	\end{tabular}
+	\caption{Rows spanning multi cols}
+	\label{rowsspan}
+\end{table}
+\subsubsection{Columns spanning multiple rows}
+
+\paragraph{}
+The first thing to do: \verb|\usepackage{|\emph{multirow}\verb|}|.\\
+And then using the command:\\ \verb|\multirow{|\emph{num\_rows}\verb|}{|\emph{width}\verb|}{|\emph{contents}\verb|}|.
+\begin{description}
+	\item[\{*\} for the \{\emph{width}\}] means the contents' natural width.
+\end{description}
+
+\paragraph{Note:} The blank entry must be inserted fo each appropriate cell in each subsequent row to be spanned.
+
+\subsubsection{Spanning in both directions simultaneously}
+\begin{verbatim}
+\begin{tabular}{cc | c | c | c | c | l}
+	\cline{3-6}
+	& & \multicolumn{4}{| c |}{Primes} \\
+	\cline{3-6}
+	& & 2 & 3 & 5 & 7 \\
+	\cline{1-6}
+	\multicolumn{1}{| c |}{\multirow{2}{*}{Powers}} &
+	\multicolumn{1}{| c |}{504} &
+	3 & 2 & 0 & 1 & \\
+	\cline{2-6}
+	\multicolumn{1}{| c |}{} &
+	\multicolumn{1}{| c |}{540} &
+	2 & 3 & 1 & 0 & \\
+	\cline{1-6}
+	\multicolumn{1}{| c |}{\multirow{2}{*}{Powers}} &
+	\multicolumn{1}{| c |}{gcd} &
+	2 & 2 & 0 & 0 & min \\
+	\cline{2-6}
+	\multicolumn{1}{| c |}{} &
+	\multicolumn{1}{| c |}{lcm} &
+	3 & 3 & 1 & 1 & max \\
+	\cline{1-6}
+\end{tabular}
+\end{verbatim}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{cc | c | c | c | c | l}
+	\cline{3-6}
+	& & \multicolumn{4}{| c |}{Primes} \\
+	\cline{3-6}
+	& & 2 & 3 & 5 & 7 \\
+	\cline{1-6}
+	\multicolumn{1}{| c |}{\multirow{2}{*}{Powers}} &
+	\multicolumn{1}{| c |}{504} & 3 & 2 & 0 & 1 & \\
+	\cline{2-6}
+	\multicolumn{1}{| c |}{} &
+	\multicolumn{1}{| c |}{540} &
+	2 & 3 & 1 & 0 & \\
+	\cline{1-6}
+	\multicolumn{1}{| c |}{\multirow{2}{*}{Powers}} &
+	\multicolumn{1}{| c |}{gcd} & 2 & 2 & 0 & 0 & min \\
+	\cline{2-6}
+	\multicolumn{1}{| c |}{} &
+	\multicolumn{1}{| c |}{lcm} &
+	3 & 3 & 1 & 1 & max \\
+	\cline{1-6}
+	\end{tabular}
+	\caption{Columns multiple rows}
+	\label{multirows}
+\end{table}
+
+\subsection{Resize tables}
+
+\paragraph{Require:} The \emph{graphicx} package.
+\paragraph{Command:} \verb|\resizebox{|\emph{width}\verb|}{|\emph{height}\verb|}{|\emph{object}\verb|}|.
+\begin{verbatim}
+\resizebox{10cm}{!}{\begin{tabular} . . . \end{tabular}}
+\end{verbatim}
+\paragraph{Alternatively:} \verb|\scalebox{|\emph{ratio}\verb|}{|\emph{object}\verb|}|. Using in the same way, but use \emph{ratio}
+instead of \emph{fixed width}.
+\begin{verbatim}
+\scalebox{1.5cm}{ \begin{tabular} . . . \end{tabular} }
+\end{verbatim}
+
+\paragraph{Tweak space between columns.} \verb|\setlength{\tabcolsep}{5pt}|. The \LaTeX{}'s default value is \emph{6pt}.
+
+\subsection{Sideaways tables}
+\paragraph{Package:} \emph{rotating}.
+\paragraph{Environment:} \emph{sideawaystable}.
+\begin{verbatim}
+\begin{sideawaystable}
+	\begin{tabular}
+		. . .
+	\end{tabular}
+\end{sideawaystable}
+\end{verbatim}
+\paragraph{Alternatively:} \emph{rotfloat} package provides the `H' options for \\
+\emph{sideawaystable} environment.
+\begin{verbatim}
+\begin{sideawaystable}[H]
+\end{verbatim}
+
+\subsection{Alternate rows color in tables}
+\paragraph{Require:} \emph{xcolor} with \emph{table} option.
+\begin{verbatim}
+\usepackage[table]{xcolor}
+\end{verbatim}
+\paragraph{Command:} \verb|\rowcolor{|\emph{starting row}\verb|}{|\emph{odd color}\verb|}{|\emph{even color}\verb|}|.
+%\begin{center}
+\begin{verbatim}
+	\rowcolor{1}{red}{blue}
+	\begin{tabular}{| c | c | c |}
+		\hline
+		1 & 2 & 3 \\ \hline
+		4 & 5 & 6 \\ \hline
+		7 & 8 & 9 \\ \hline
+	\end{tabular}
+\end{verbatim}
+%\end{center}
+
+\paragraph{Other commands:}
+\begin{itemize}
+	\item[-] \verb|\hidecolor|: deactive highlighting color of a specified row.
+	\item[-] \verb|\showcolor|: reactive highlighting color of a specified row.
+\end{itemize}
+
+\subsection{Color of individual cells}
+\paragraph{Require:} \emph{xcolor} with \emph{table} option.
+\paragraph{Command:} \verb|\cellcolor[|\emph{gray}\verb|]{0.9}|
+\begin{itemize}
+	\item[-] \emph{gray}: denotes \emph{grayscale} colorscheme, not the color \emph{grey}.
+	\item[-] \verb|0.9|: denotes how dark the grey is.
+\end{itemize}
+\subparagraph{Color the cell:} \verb|\cellcolor{|\emph{blue}\verb|}|.
+
+\subsection{Partial vertical lines}
+
+\subsection[\texttt{table}]{The \texttt{table} environment - captioning}
+\begin{description}
+	\item[Form:] \verb|\begin{table}[|\emph{placement}\verb|]|
+	\item[\emph{placement}s:] default is \verb|[tbp]|\hfill
+		\begin{description}
+			\item[\emph{h}:] here.
+			\item[\emph{t}:] top of page.
+			\item[\emph{b}:] bottom of page.
+			\item[\emph{p}:] float.
+			\item[\emph{!}:] float.
+		\end{description}
+	\item[Commands:] \hfill
+		\begin{description}
+			\item[\texttt{$\backslash$centering}:] centering sub element.
+			\item[\texttt{$\backslash$caption}:] set caption of the table.
+			\item[\texttt{$\backslash$label}:] set \emph{label} to reference.
+		\end{description}
+\end{description}
+
+\paragraph{Example:}
+\begin{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | p{10cm} |}
+	\hline
+	hmm & Somthing is here. \\ \hline
+	\end{tabular}
+\caption{table example}
+\label{table_examp}
+\end{verbatim}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | p{10cm} |}
+	\hline
+	hmm & Somthing is here. \\ \hline
+	\end{tabular}
+	\caption{\texttt{table} example}
+	\label{table_examp}
+\end{table}
+
+\subparagraph{} Other examples are [\ref{tabular_positions}], [\ref{tabular_specs}], [\ref{tabular_commands}].
+
+\subsection[\texttt{tabular$\star$}]{The \texttt{tabular$\star$} environment - controlling table width}
+\subsubsection{Example 1}
+\begin{verbatim}
+	\begin{tabular*}{0.7\textwidth}{| c | c | c | r |}
+		\hline
+		\textbf{Midname} & \textbf{Firstname} &
+		\textbf{Lastname} & \textbf{YoB} \\
+		\hline
+		xuan & sam & dinh & 1990 \\
+		\hline
+	\end{tabular*}
+\end{verbatim}
+\subsubsection{Example 2}
+
+
+\begin{verbatim}
+	\begin{tabular*}{0.75\textwidth}
+		{@{\extracolsep{\fill}} | c | c | c | r |}
+		\hline
+		\textbf{Midname} & \textbf{Firstname} &
+		\textbf{Lastname} & \textbf{YoB} \\
+		\hline
+		xuan & sam & dinh & 1990 \\
+		\hline
+	\end{tabular*}
+\end{verbatim}
+
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular*}{0.75\textwidth}{@{\extracolsep{\fill}} | c | c | c | r |}
+		\hline
+		\textbf{Midname} & \textbf{Firstname} & \textbf{Lastname} & \textbf{YoB} \\
+		\hline
+		xuan & sam & dinh & 1990 \\
+		\hline
+	\end{tabular*}
+	\caption{Controlling table width - 2}
+	\label{tableWidth2}
+\end{table}
+
+\subsection[\texttt{tabularx} package]{The \texttt{tabularx} package - simple column stretching}
+\subsection{Vertically centerd images}
+
+\paragraph{}
+Inserting images into a table row will align it at the top of the cell. By using the \emph{array}
+package this problem can be solved. Defining a new column type will keep the image vertically centered.
+\begin{verbatim}
+\newcolumntype{V}
+{>{\centering\arraybackslash} m{.4\linewidth}}
+\end{verbatim}
+
+\paragraph{}
+Or use a parbox to center the image:\\
+\verb|\parbox[c]{1em}{\includegraphics{|\emph{image.png}\verb|}}|
+
+\paragraph{}
+A raisebox works as well, also allowing to manually fine-tune the alignment with its
+first parameter: \\
+\verb|\raisebox{-.5\height}{\includegraphics{|\emph{image.png}\verb|}}|
+
+\subsection{Professional tables}
+
+\paragraph{}
+Many professionally typeset books and journals feature simple tables,
+which have appropriate spacing above and below lines, and almost \emph{never}
+use vertical rules. \\
+Many examples of \LaTeX{} tables showcase the use of vertical rules (using ``\verb+|+''),
+and double-rules (using ``\verb|\hline\hline|'' or ``\verb+||+''), which are regarded as
+unnecessary and distracting in a professionally published form. The \emph{booktabs}
+package is useful for easily providing this professionalism in \LaTeX{} tables, and
+documentation also provides guidelines on what constitutes a ``good'' table.
+\paragraph{}
+In brief, the package uses \verb|\toprule| for the uppermost rule (or line),
+\verb|midrule| for the rules apearing in the middle of the table (such as under the header),
+and \verb|\bottomrule| for the lowermost rule. \\
+This ensures that the rule weight and spacing are acceptable. In addition, \verb|\cmidrule|
+can be used for mid-rules that span specified columns.\\
+The following example contrasts the use of \emph{booktabs} and to quivalent normarl \LaTeX{}
+implementations (the second example requires \emph{array} or \emph{dcolumn},
+and the third example requires \emph{booktabs} package).
+\subsubsection{Normal \LaTeX{}}
+%\include{normallatex}
+\paragraph{Code:}
+\begin{verbatim}
+	\begin{tabular}{| l l r |}
+		\hline
+		\multicolumn{2}{c}{Item} \\
+		\cline{1-2} Animal & Description & Price (\$) \\
+		\hline
+		Gnat & per gram & 13.65 \\
+		& each & 0.01 \\
+		Gnu & stuffed & 92.50 \\
+		Emu & stuffed & 33.33 \\
+		Armadillo & frozen & 8.99 \\
+		\hline
+	\end{tabular}
+\end{verbatim}
+
+%\paragraph{Result:}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l l r |}
+		\hline
+		\multicolumn{2}{c}{Item} \\
+		\cline{1-2} Animal & Description & Price (\$) \\
+		\hline
+		Gnat & per gram & 13.65 \\
+		& each & 0.01 \\
+		Gnu & stuffed & 92.50 \\
+		Emu & stuffed & 33.33 \\
+		Armadillo & frozen & 8.99 \\
+		\hline
+	\end{tabular}
+	\caption{Table using normal \LaTeX{}'s commands}
+	\label{nomarllatex}
+\end{table}
+
+\subsubsection{Using \emph{array}}
+\paragraph{Code:}
+\begin{verbatim}
+% usepackage booktabs or dcolumn.
+\begin{tabular}{  l l r  }
+	\firsthline
+	\multicolumn{2}{c}{Item} \\
+	\cline{1-2} Animal & Description & Price (\$) \\
+	\hline Gnat & per gram & 13.65 \\ &
+	each & 0.01 \\
+	gnu & stuffed & 92.50 \\
+	Emu & stuffed & 33.33 \\
+	Armadillo & frozen & 8.99 \\
+	\lasthline
+\end{tabular}
+\end{verbatim}
+
+%\paragraph{Result:}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{  l l r  }
+	\firsthline
+	\multicolumn{2}{c}{Item} \\
+	\cline{1-2} Animal & Description & Price (\$) \\
+	\hline Gnat & per gram & 13.65 \\ &
+	each & 0.01 \\
+	gnu & stuffed & 92.50 \\
+	Emu & stuffed & 33.33 \\
+	Armadillo & frozen & 8.99 \\
+	\lasthline
+	\end{tabular}
+	\caption{Table using the \emph{array} package}
+	\label{tablearray}
+\end{table}
+
+
+
+\subsubsection{Using \emph{booktabs}}
+%\include{usingbooktabs}
+
+\paragraph{Code:}
+\begin{verbatim}
+\begin{tabular}{  l l r  }
+	\toprule
+	\multicolumn{2}{c}{Item} \\
+	\cmidrule(r){1-2} Animal & Description & Price (\$) \\
+	\midrule Gnat & per gram & 13.65 \\ &
+	each & 0.01 \\
+	gnu & stuffed & 92.50 \\
+	Emu & stuffed & 33.33 \\
+	Armadillo & frozen & 8.99 \\
+	\bottomrule
+\end{tabular}
+\end{verbatim}
+
+%\paragraph{Result:}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{  l l r  }
+	\toprule
+	\multicolumn{2}{c}{Item} \\
+	\cmidrule(r){1-2} Animal & Description & Price (\$) \\
+	\midrule Gnat & per gram & 13.65 \\ &
+	each & 0.01 \\
+	gnu & stuffed & 92.50 \\
+	Emu & stuffed & 33.33 \\
+	Armadillo & frozen & 8.99 \\
+	\bottomrule
+	\end{tabular}
+	\caption{Table using the \emph{booktabs} package}
+	\label{tablebooktabs}
+\end{table}
+
+\paragraph{}
+Usually the need arises for footnotes under a table (and not at the bottom of the page),
+with a caption properly spaced above the table. These a addressed by the \emph{ctable} package. \\
+It provides the option of a short caption given to be inserted in the list of tables,
+instead of the actual caption (which may be quit long and inappropriate for the list of tables).
+The \emph{ctable} package uses the \emph{booktabs} package.
+%\hyphenation{commands}
+\subsubsection[Adding rule space]{Adding rule space above or below \texttt{$\backslash$hline} and \texttt{$\backslash$cline} commands}
+
+\paragraph{}
+An alternative way to adjust the rule spacing is to add \\ \verb|\noalign{\smallskip}|
+\\ before or after the \verb|\hline| and \verb|\cline{|\emph{i-j}\verb|}| commands:
+
+\paragraph{Example:}
+\begin{verbatim}
+	\begin{tabular}{ l l r }
+		\hline\noalign{\smallskip}
+		\multicolumn{2}{c}{Item} \\
+		\cline{1-2}\noalign{\smallskip}
+		Animal & Description & Price (\$) \\
+		\noalign{\smallskip}\hline\noalign{\smallskip}
+		Gnat & per gram & 13.65 \\ &
+		each & 0.01 \\
+		Gnu & stuffed & 92.50 \\
+		Emu & stuffed & 33.33 \\
+		Armadillo & frozen 8.99 \\
+		\noalign{\smallskip}\hline
+	\end{tabular}
+	\end{verbatim}
+
+\begin{table}[htnp]
+	\centering
+	\begin{tabular}{ l l r }
+		\hline\noalign{\smallskip}
+		\multicolumn{2}{c}{Item} \\
+		\cline{1-2}\noalign{\smallskip}
+		Animal & Description & Price (\$) \\
+		\noalign{\smallskip}\hline\noalign{\smallskip}
+		Gnat & per gram & 13.65 \\ &
+		each & 0.01 \\
+		Gnu & stuffed & 92.50 \\
+		Emu & stuffed & 33.33 \\
+		Armadillo & frozen 8.99 \\
+		\noalign{\smallskip}\hline
+	\end{tabular}
+	\caption{Adding rule space } % using \texttt{$\backslash$noalign\{$\backslash$smallskip\} }}
+	\label{addingrulespace}
+\end{table}
+
+\paragraph{}
+You may also specify the skip after a line explicitly using glue after the line terminator.
+\begin{verbatim}
+	\begin{tabular}{| l | l |}
+		\hline
+		Minaral & Color \\ [1cm]
+		Ruby & red \\
+		Sapphire & blue \\
+		\hline
+	\end{tabular}
+\end{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| l | l |}
+		\hline
+		Minaral & Color \\ [1cm]
+		Ruby & red \\
+		Sapphire & blue \\
+		\hline
+	\end{tabular}
+	\caption{Skip after a line}
+	\label{skipafterline}
+\end{table}
+
+\subsection{Tables with different font size}
+
+\paragraph{}
+A table can be globally switched to a diffenrent font size by simply adding the
+desired size command (here: \verb|\footnotesize|) after the \\
+\verb|\begin{table}|\ldots statement:
+\begin{verbatim}
+begin{table}[h] \foornotesize
+\caption{Performance at peak F-measure}
+	\begin{tabular}{| r | r || c | c | c|}
+		\ldots
+	\end{tabular}
+\end{table}
+\end{verbatim}
+
+The table caption font size is not affected. To control the caption font size,
+see Caption Styles.
+
+\subsection{Table with legend}
+
+\paragraph{}
+To add a legend to a table the \emph{caption} package can be used. With the
+\emph{caption} package a \verb|\caption*{. . .}| statement can be added
+besides the normal \verb|\caption{. . .}|.
+
+\paragraph{Example:}
+
+\begin{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| r | r || l | l |} 
+		%\hline
+		\toprule
+		UID & GID & Login & Comment \\ % \hline
+		\midrule
+		0 & 0 & root & admin \\ \hline
+		1000 & 1000 & n2i & xuansamdinh \\ % \hline
+		\bottomrule
+	\end{tabular}
+	\caption{A normal caption}
+	\caption*{A legend, even a table can be used
+	\begin{tabular}{@{} l l @{}}
+			\hline
+			user: & xuansamdinh \\ \hline
+		\end{tabular} }
+\end{table}
+\end{verbatim}
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{| r | r || l | l |} 
+		%\hline
+		\toprule
+		UID & GID & Login & Comment \\ % \hline
+		\midrule
+		0 & 0 & root & admin \\ \hline
+		1000 & 1000 & n2i & xuansamdinh \\ % \hline
+		\bottomrule
+	\end{tabular}
+	\caption{A normal caption}
+	\caption*{A legend, even a table can be used
+	\begin{tabular}{@{} l l @{}}
+			\hline
+			user: & xuansamdinh \\ \hline
+	\end{tabular} }
+	\label{captionstar}
+\end{table}
+The normal caption is needed for label and references.
+
+\subsection{More features}
+
+\paragraph{}
+Have a look at one of the following packages:
+\begin{description}
+	\item[\emph{hhline}:] do whatever you want with horizontal lines
+	\item[\emph{array}:] gives you more freedom on how to define column
+	\item[\emph{colortbl}:] make your table more colorful
+	\item[\emph{supertabular}:] for tables that need to sretch over serveral pages
+	\item[\emph{longtable}:] similar to \emph{supertabular} \hfill
+		\begin{description}
+			\item[Note:] footnotes do not work properly in a normal tabular environment
+				If you replace it with a longtable environment, footnotes work properly
+		\end{description}
+	\item[\emph{xtab}:] Yet another package for tables that need to span many pages
+	\item[\emph{tabulary}:] modified \emph{tabular*} allowing width of columns set for equal heights
+	\item[\emph{arydshln}:] creates dashed horizontal and vertical lines
+	\item[\emph{ctable}:] allows for footnotes under table and properly spaced caption above (incorporates \emph{booktabs} package)
+	\item[\emph{slashbox}:] create 2D tables
+	\item[\emph{dcolumn}:] decimal point alignment of numeric cells with rounding
+	\item[\emph{rccol}:] advanced decimal point alignment of numeric cells with rounding
+	\item[\emph{speadtab}:] spread sheets allowing the use formulae
+\end{description}
+\subsection{Summary}
+
+
+
+
+
+
+
+
+
+\end{document}
